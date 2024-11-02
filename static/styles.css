@@ -1,0 +1,239 @@
+@font-face {
+  font-family: "Dela Gothic One";
+  src: url("./woff2/DelaGothicOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('woff2/Inter_Variable.ttf');
+}
+
+@font-face {
+  font-family: 'Fira Code VF';
+  src: url('woff2/FiraCode-VF.woff2') format('woff2-variations'),
+       url('woff/FiraCode-VF.woff') format('woff-variations');
+  /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+@keyframes wave-text {
+  0% {
+    transform: translateY(0em);
+  }
+  60% {
+    transform: translateY(-0.1em);
+  }
+  100% {
+    transform: translateY(0em);
+  }
+}
+
+.logo {
+  font-size: 2em;
+  animation: wave-text 1s ease-in-out infinite;
+}
+
+.logo span {
+  font-family: "Dela Gothic One";
+  color: #cabedc;
+  display: inline-block;
+  animation: wave-text 1s ease-in-out infinite;
+}
+
+
+.logo span:nth-of-type(1) {
+  animation-delay: 0s;
+}
+.logo span:nth-of-type(2) {
+  animation-delay: 0.1s;
+}
+.logo span:nth-of-type(3) {
+  animation-delay: 0.2s;
+}
+.logo span:nth-of-type(4) {
+  animation-delay: 0.3s;
+}
+.logo span:nth-of-type(5) {
+  animation-delay: 0.4s;
+}
+.logo span:nth-of-type(6) {
+  animation-delay: 0.5s;
+}
+.logo span:nth-of-type(7) {
+  animation-delay: 0.6s;
+}
+
+.fira {
+  font-family: 'Fira Code VF';
+  font-feature-settings: "calt" 1;  
+  text-rendering: optimizeLegibility; 
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-weight: 400;
+}
+
+
+* {
+  color: white;
+  font-family: "Inter";
+}
+
+body {
+  background-color: #1a1a1a;
+}
+
+/* For Chrome and other webkit browsers */
+::-webkit-scrollbar {
+  width: 0.2em;
+  height: fit-content;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bca4e3;
+  border-radius: 1em;
+  cursor:pointer;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+}
+
+.button-deck {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+  margin-bottom: 1em; 
+}
+
+.rewrite-button, .summarize-button {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+.clicker {
+  border: none;
+
+  background-color: #242424;
+  cursor: pointer;
+
+  padding: 0.5em;
+
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 1.7em;
+
+  box-shadow: 0 0.5em #727272;
+  border-radius: 0.5em;
+} 
+
+.clicker:active {
+  box-shadow: 0 0.3em #666;
+  transform: translateY(0.25em);
+}
+
+.key {
+  background-color: #333;
+  padding: 0.3em;
+  border-radius: 0.5em;
+}
+
+.text {
+  font-size: 1.3em;
+}
+
+.icon {
+  font-size: 1.5em;
+}
+
+
+.textarea-box {
+  background-color: #242424;
+  box-shadow: 0 0 0.5em #bca4e3;
+  
+  padding: 1em;
+  
+  width: 45vw;
+  height: 35vh;
+  
+  border-radius: 1em;
+}
+
+.textarea-box textarea {
+  outline: none;
+  border: none;
+
+  background-color: transparent;
+
+  font-size: 1.3em;
+  
+  resize: none;
+  
+  height: 99%;
+  width: 99%;
+}
+
+#other-info {
+  visibility: hidden;
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+  margin-bottom: 1em;
+}
+
+
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alert-box {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #333;
+}
+
+.alert-title {
+  color: #ff0000;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.alert-close {
+  color: #ff0000;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.alert-content {
+  padding: 16px;
+}
