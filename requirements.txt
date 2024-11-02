@@ -1,2 +1,6 @@
-ollama
-flask
+Requirements:
+  Python Libraries:
+    - ollama 0.3.3
+    - flask
+  Ollama:
+    - qwen2.5:1.5B (By default this is used.)
