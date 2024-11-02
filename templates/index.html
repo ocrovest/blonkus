@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blonkus</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/open_moji_leg.png')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <span>b</span>
+            <span>l</span>
+            <span>o</span>
+            <span>n</span>
+            <span>k</span>
+            <span>u</span>
+            <span>s</span>
+        </div>
+        <div class="button-deck">
+            <button class="clicker rewrite-button" id="rewrite" onclick="rewrite('professional')">
+                <span class="icon">🧐</span>
+                <span class="text">Professional</span>
+                <span class="fira key">Ctrl + Q</span>
+            </button>
+            <button class="clicker rewrite-button" id="rewrite" onclick="rewrite('casual')">
+                <span class="icon">😎</span>
+                <span class="text">Casual</span>
+                <span class="fira key">Ctrl + E</span>
+            </button>
+            <button class="clicker summarize-button" onclick="summarize()">
+                <span class="icon">🧙‍♀️</span>
+                <span class="text">Summarize</span>
+                <span class="fira key">Ctrl + S</span>
+            </button>
+        </div>
+        <br>
+        <div class="textarea-box">
+            <textarea class="fira" placeholder="Start typing, or press Ctrl + M to generate text." spellcheck="false" id="textbox"></textarea>
+        </div>
+        <br>
+        <div id="other-info">
+            <div>Currently Using: <b>qwen2.5</b>:1.5b</div>
+            <div id="timebox">Why are you inspect elementing?</div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js')}}">
+    </script>
+</body>
+</html>
