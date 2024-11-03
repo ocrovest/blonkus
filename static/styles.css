@@ -30,6 +30,19 @@
   }
 }
 
+/* A glowing animation until the text is generated */
+@keyframes glow { 
+  33% {
+    box-shadow: 0 0 0.5em #bca4e3;
+  }
+  66% {
+    box-shadow: 0 0 1em #aee;
+  }
+  100% {
+    box-shadow: 0 0 0.5em #bca4e3;
+  }
+}
+
 .logo {
   font-size: 2em;
   animation: wave-text 1s ease-in-out infinite;
@@ -166,6 +179,10 @@ body {
   height: 35vh;
   
   border-radius: 1em;
+
+  animation-name: none;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 .textarea-box textarea {
