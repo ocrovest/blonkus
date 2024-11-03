@@ -37,12 +37,12 @@
         </div>
         <br>
         <div class="textarea-box">
-            <textarea class="fira" placeholder="Start typing, or press Ctrl + M to generate text." spellcheck="false" id="textbox"></textarea>
+            <textarea class="fira" placeholder="Start Typing...&#10;Press Ctrl + M to generate text, Ctrl + Shift + C for changing the model;" spellcheck="false" id="textbox"></textarea>
         </div>
         <br>
         <div id="other-info">
-            <div>Currently Using: <b>qwen2.5</b>:1.5b</div>
-            <div id="timebox">Why are you inspect elementing?</div>
+            <div><input class="fira" id="model" type="text" value="granite3-moe"/></div>
+            <div id="timebox"></div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='script.js')}}">
