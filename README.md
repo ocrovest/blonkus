@@ -6,13 +6,10 @@ after watching this video called [*i prompt injected apple intelligence - Evan Z
 It uses qwen2.5:1.5B by default but you should change it
 
 ## Prerequisites 
-1. Python Libraries
-- ollama 0.3.3
-- flask
-2. Ollama
-- qwen2.5:1.5B (used by default. can be changed)
-   
+ollama 0.3.3
+flask
 
-## Explaning the files
-1. agents.py - the file which runs ollama. If you want to change the model, look here.
-2. main.py - the file to run to start the website!
+## Start the site
+Just run `main.py`!
+
+You can choose models of your own on the site!
