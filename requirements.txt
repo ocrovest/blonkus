@@ -1,6 +1,3 @@
-Requirements
- - Python Libraries
-    └ ollama 0.3.3
-    └ flask
- - Ollama
-    └ qwen2.5:1.5B (used by default. can be changed)
+ollama 0.3.3
+flask
+
