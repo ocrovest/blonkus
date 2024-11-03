@@ -1,3 +1,23 @@
+function get_model(){
+    return document.getElementById("model").value;
+}
+
+async function ask(to, task="", text="") {
+    model = get_model();
+    const response = await fetch(to, {
+        method: 'POST',
+        body: JSON.stringify({"task": task, "text": text, "model": model}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return response.json();
+}
+
+
+function other_info_visibility(){
+    document.getElementById('other-info').style.visibility = "visible";
+}
 
 function showAlert(description) {
     const overlay = document.createElement('div');
@@ -34,9 +54,8 @@ function showAlert(description) {
 }
 
 
-function rewrite(task){
+async function rewrite(task){
     const textarea = document.getElementById('textbox');
-    const other_info = document.getElementById('other-info')
     const time_box = document.getElementById('timebox')
     
     const start = textarea.selectionStart;
@@ -52,30 +71,27 @@ function rewrite(task){
     const before = textarea.value.substring(0, start);
     const after = textarea.value.substring(end);
 
-    fetch('/rewrite', {
-        method: 'POST',
-        body: JSON.stringify({"task": task, "text": selectedText}),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        let receivedString = data.response;
-        let time_taken = data.time;
-        textarea.value = before + receivedString + after;
-        textarea.focus();
-        textarea.setSelectionRange(start, start + receivedString.length);
+    data = await ask("/rewrite", task, selectedText);
 
-        time_box.innerHTML = 'rewrote in <b>' + time_taken + 's</b>';
-        
-        other_info.style.visibility = "visible";
-    });
+    if (data.hasOwnProperty("err")) {
+        showAlert(data.err)
+        return;
+    }
+
+    // Edit the text area such that the selection is replaced
+    let receivedString = data.response;
+    let time_taken = data.time;
+    textarea.value = before + receivedString + after;
+    textarea.focus();
+    textarea.setSelectionRange(start, start + receivedString.length);
+
+    time_box.innerHTML = 'rewrote in <b>' + time_taken + 's</b>';
+    
+    other_info_visibility();
 }
 
-function summarize(){
+async function summarize(){
     const textarea = document.getElementById('textbox');
-    const other_info = document.getElementById('other-info')
     const time_box = document.getElementById('timebox')
     
     const start = textarea.selectionStart;
@@ -91,48 +107,46 @@ function summarize(){
     const before = textarea.value.substring(0, start);
     const after = textarea.value.substring(end);
 
-    fetch('/summarize', {
-        method: 'POST',
-        body: JSON.stringify({"text": selectedText}),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        let receivedString = data.response;
-        let time_taken = data.time;
-        textarea.value = before + receivedString + after;
-        textarea.focus();
-        textarea.setSelectionRange(start, start + receivedString.length);
+    data = await ask("/summarize", "ToDo", selectedText);
 
-        time_box.innerHTML = 'summarized in <b>' + time_taken + 's</b>';
-        
-        other_info.style.visibility = "visible";
-    });
+    if (data.hasOwnProperty("err")) {
+        showAlert(data.err)
+        return;
+    }
+
+    let receivedString = data.response;
+    let time_taken = data.time;
+    textarea.value = before + receivedString + after;
+    textarea.focus();
+    textarea.setSelectionRange(start, start + receivedString.length);
+
+    time_box.innerHTML = 'summarized in <b>' + time_taken + 's</b>';
+    
+    other_info_visibility();
 }
 
-function random(){
+async function random(){
     const textarea = document.getElementById('textbox');
     
     if (textarea.value !== ""){
         return;
     }
-    const other_info = document.getElementById('other-info')
     const time_box = document.getElementById('timebox')
 
-    fetch('/random', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        textarea.value = data.response;
-        other_info.style.visibility = "visible";
-        time_box.innerHTML = "randomized in <b>" + data.time + "s</b>";
-    })
+    data = await ask("/random")
+    time_taken = data.time;
+
+    if (data.hasOwnProperty("err")) {
+        showAlert(data.err)
+        return;
+    }
+
+    textarea.value = data.response;
+    textarea.focus();
+
+    time_box.innerHTML = 'randomized in <b>' + time_taken + 's</b>';
+    
+    other_info_visibility();
 }
 
 document.addEventListener("keydown", e =>{
@@ -151,5 +165,9 @@ document.addEventListener("keydown", e =>{
     else if (e.key.toLowerCase() == "m" && e.ctrlKey){
         e.preventDefault();
         random();
+    }
+    else if (e.key.toLowerCase() == "c" && e.ctrlKey && e.shiftKey){
+        e.preventDefault();
+        other_info_visibility();
     }
 })
