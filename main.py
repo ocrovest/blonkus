@@ -24,7 +24,6 @@ def rewrite():
 
 @app.route("/summarize", methods=["POST"])
 def summarize():
-    print("Got Request")
     data = request.get_json()
     text = data.get("text")
     model = data.get("model")
@@ -35,7 +34,6 @@ def summarize():
 
 @app.route("/random", methods=["POST"])
 def random_text():
-    print("Got Request")
     data = request.get_json()
     model = data.get("model")
     agent = Agent(model=model, task="random", content="Write about anything", rewrite=False)
