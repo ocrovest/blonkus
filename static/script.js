@@ -2,6 +2,15 @@ function get_model(){
     return document.getElementById("model").value;
 }
 
+function glow(on){
+    textarea_box = document.getElementById("textarea-box");
+    if (on){
+        textarea_box.style.animationName = "glow";
+        return;
+    }
+    textarea_box.style.animationName = "none";
+}
+
 async function ask(to, task="", text="") {
     model = get_model();
     const response = await fetch(to, {
@@ -55,6 +64,7 @@ function showAlert(description) {
 
 
 async function rewrite(task){
+    glow(true)
     const textarea = document.getElementById('textbox');
     const time_box = document.getElementById('timebox')
     
@@ -88,9 +98,11 @@ async function rewrite(task){
     time_box.innerHTML = 'rewrote in <b>' + time_taken + 's</b>';
     
     other_info_visibility();
+    glow(false)
 }
 
 async function summarize(){
+    glow(true)
     const textarea = document.getElementById('textbox');
     const time_box = document.getElementById('timebox')
     
@@ -123,9 +135,11 @@ async function summarize(){
     time_box.innerHTML = 'summarized in <b>' + time_taken + 's</b>';
     
     other_info_visibility();
+    glow(false)
 }
 
 async function random(){
+    glow(true)
     const textarea = document.getElementById('textbox');
     
     if (textarea.value !== ""){
@@ -147,6 +161,7 @@ async function random(){
     time_box.innerHTML = 'randomized in <b>' + time_taken + 's</b>';
     
     other_info_visibility();
+    glow(false)
 }
 
 document.addEventListener("keydown", e =>{
