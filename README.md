@@ -6,11 +6,11 @@ after watching this video called [*i prompt injected apple intelligence - Evan Z
 It uses qwen2.5:1.5B by default but you should change it
 
 ## Prerequisites 
- - Python Libraries
-    └ ollama 0.3.3
-    └ flask
- - Ollama
-    └ qwen2.5:1.5B (used by default. can be changed)
+1. Python Libraries
+- ollama 0.3.3
+- flask
+2. Ollama
+- qwen2.5:1.5B (used by default. can be changed)
    
 
 ## Explaning the files
