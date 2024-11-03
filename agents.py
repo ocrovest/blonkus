@@ -1,6 +1,5 @@
 import json
 import ollama
-from sys import stdout
 from time import time, sleep
 
 
@@ -9,31 +8,25 @@ def load_prompts():
     prompts = json.load(f)
   return prompts
 
-def dolphin(system, content):
-  response = ollama.chat(model="qwen2.5:1.5b",
-  messages=[
-    {
-      'role': 'system',
-      'content': system
-    },
-    {
-      'role': 'user',
-      'content': content,
-    }]
-  )
-  return response['message']['content']
-
-def Agent(task: str, content: str, rewrite: bool=True):
+def Agent(model:str, task: str, content: str, rewrite: bool=True):
   prompts = load_prompts()
   system = prompts["rewrite"][task] if rewrite else prompts[task]
   
   start_time = time()
   
-  response = dolphin(system, content)
+  try:
+    response = ollama.chat(model=model,
+                           messages=[{'role': 'system', 'content': system},
+                                     {'role': 'user','content': content}
+                                    ])
+  except:
+    return {"err": "You do not have this model"}
   
+  message = response['message']['content']
+
   end_time = time()
   total_time = end_time - start_time
   total_time = round(total_time, 2)
   
-  returned_output = {"time": total_time, "response":response}
+  returned_output = {"time": total_time, "response": message}
   return returned_output
